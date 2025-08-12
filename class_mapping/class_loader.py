@@ -13,7 +13,7 @@ class ClassDictionary:
         class2name (dict): A dictionary to store the class data for ImageNet2012.
         class2short_class (dict): A dictionary to store the class data for ImageNet21k.
     """
-    def __init__(self, filename = 'imagenet2012_classes.npy', custom_cls_filename='class_name_mod.npy',
+    def __init__(self, filename = 'imagenet2012_classes.npy', custom_cls_filename='cls_name_mod.npy',
                  filename_21k = 'imagenet21k_classes.npy', filename_21k_r = 'imagenet21k_classes_r.npy',
                  filename_val_class = 'val_img_classes_pairs.npy'):
         current_dir = os.path.dirname(__file__)
@@ -134,6 +134,8 @@ class ClassDictionary:
         """
         if not self._custom_data_loaded:
             self.__load_class2custom_name_mapping()
+        if self.class2custom_name is None:
+            return None
         return self.class2custom_name[key]
 
     def get_class_1k(self, key):
