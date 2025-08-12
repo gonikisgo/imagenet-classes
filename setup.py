@@ -21,16 +21,15 @@ def read_requirements():
 
 setup(
     name="imagenet-classes",
-    version="0.1.0",
     author="Illia Volkov, Nikita Kisel",
     author_email="kiselnik@fel.cvut.cz",  # Primary contact
-    description="A Python package for managing and retrieving ImageNet class names and mappings",
+    description="A Python package for managing and retrieving ImageNet-1k mappings among integer class IDs, string class IDs, and human-readable class names.",
     long_description=read_readme(),
     long_description_content_type="text/markdown",
     url="https://github.com/gonikisgo/imagenet-classes",
     packages=find_packages(),
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "Intended Audience :: Science/Research",
         "License :: OSI Approved :: MIT License",
@@ -44,7 +43,7 @@ setup(
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    python_requires=">=3.7",
+    python_requires=">=3.8",
     install_requires=[
         "numpy>=1.19.0",
     ],
