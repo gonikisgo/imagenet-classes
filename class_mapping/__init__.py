@@ -6,7 +6,7 @@ A Python package for managing and retrieving ImageNet-1k mappings among integer 
 
 from .class_loader import ClassDictionary
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 __author__ = "Illia Volkov, Nikita Kisel"
 __email__ = "kiselnik@fel.cvut.cz"
 
