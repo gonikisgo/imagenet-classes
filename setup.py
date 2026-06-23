@@ -44,9 +44,7 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     python_requires=">=3.8",
-    install_requires=[
-        "numpy>=1.19.0",
-    ],
+    install_requires=[],
     extras_require={
         "dev": [
             "pytest>=6.0",
@@ -58,8 +56,8 @@ setup(
     },
     include_package_data=True,
     package_data={
-        "class_mapping": [
-            "*.npy",
+        "imagenet_classes": [
+            "*.json",
         ],
     },
     zip_safe=False,

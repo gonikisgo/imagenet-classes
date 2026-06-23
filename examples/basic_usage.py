@@ -3,56 +3,45 @@
 Basic usage example for the imagenet-classes package.
 """
 
-from class_mapping import ClassDictionary
+import imagenet_classes as ic
+from imagenet_classes import ClassDictionary
 
 
 def main():
-    """Demonstrate basic usage of the ClassDictionary class."""
-    
     print("ImageNet Classes Package - Basic Usage Example")
     print("=" * 50)
-    
-    # Initialize the class dictionary
-    print("Initializing ClassDictionary...")
-    class_dict = ClassDictionary()
-    
-    # Demonstrate utility methods
-    print("\n1. Creating class name dictionaries:")
-    sample_classes = ['tench', 'goldfish', 'great_white_shark', 'tiger_shark', 'hammerhead']
-    
-    # Create index to class name mapping
-    idx_to_name = class_dict.create_cls_name_dict(sample_classes)
-    print(f"   Index to name: {idx_to_name}")
-    
-    # Create class name to index mapping
-    name_to_idx = class_dict.create_im_to_orig(sample_classes)
-    print(f"   Name to index: {name_to_idx}")
-    
-    print("\n2. Accessing class data:")
-    print("   Note: Data files (.npy) need to be present for these methods to work")
-    
-    # Try to get class names (will return None if files don't exist)
-    class_name = class_dict.get_class_name(0)
-    print(f"   Class 0: {class_name}")
-    
-    # Try to get custom class names
-    custom_name = class_dict.get_custom_class_name(0)
-    print(f"   Custom class 0: {custom_name}")
-    
-    # Try to get ImageNet21k mappings
-    class_1k = class_dict.get_class_1k("n01440764")
-    print(f"   ImageNet21k mapping for n01440764: {class_1k}")
-    
-    print("\n3. File paths:")
-    print(f"   ImageNet2012 classes: {class_dict.filename}")
-    print(f"   ImageNet21k classes: {class_dict.filename_21k}")
-    print(f"   Custom classes: {class_dict.custom_cls_filename}")
-    
-    print("\nExample completed successfully!")
-    print("\nTo use with actual data:")
-    print("1. Ensure the required .npy files are in the class_mapping directory")
-    print("2. The package will automatically load data when methods are called")
-    print("3. Data is loaded lazily for optimal memory usage")
+
+    # --- Class name methods ---
+    print("\n1. Class name retrieval:")
+
+    # Raw synset label (comma-separated synonyms as in the dataset)
+    print(f"   get_1k_class_name(0)  → {ic.get_1k_class_name(0)}")
+    print(f"   get_1k_class_name(2)  → {ic.get_1k_class_name(2)}")
+
+    # Single curated human-readable name
+    print(f"   get_1k_clean_name(0)  → {ic.get_1k_clean_name(0)}")
+    print(f"   get_1k_clean_name(2)  → {ic.get_1k_clean_name(2)}")
+
+    # --- GPT descriptions and guidelines ---
+    print("\n2. GPT descriptions and guidelines:")
+    print(f"   get_gpt_class_description(0) → {ic.get_gpt_class_description(0)}")
+    print(f"   get_gpt_class_guidelines(0)  → {ic.get_gpt_class_guidelines(0)}")
+
+    # --- 1k / 21k mappings ---
+    print("\n3. 1k ↔ 21k mappings:")
+    print(f"   imagenet1k_to_21k(0)              → {ic.imagenet1k_to_21k(0)}")
+    print(f"   imagenet21k_to_1k('n01440764')    → {ic.imagenet21k_to_1k('n01440764')}")
+
+    print("\n4. Validation image → 21k key:")
+    print(f"   val_image_to_21k_key('ILSVRC2012_val_00015416.JPEG') → "
+          f"{ic.val_image_to_21k_key('ILSVRC2012_val_00015416.JPEG')}")
+
+    # --- ClassDictionary static utilities ---
+    print("\n5. Label ↔ name dict utilities:")
+    classes = ['tench', 'goldfish', 'great white shark']
+    print(f"   classes = {classes}")
+    print(f"   create_label_to_name_dict → {ClassDictionary.create_label_to_name_dict(classes)}")
+    print(f"   create_name_to_label_dict → {ClassDictionary.create_name_to_label_dict(classes)}")
 
 
 if __name__ == "__main__":
