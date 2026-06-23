@@ -12,7 +12,7 @@ class ClassDictionary:
             'label_to_names': os.path.join(_dir, 'imagenet1k_label_to_names.json'),
             '21k_to_1k':      os.path.join(_dir, 'imagenet21k_to_1k.json'),
             '1k_to_21k':      os.path.join(_dir, 'imagenet1k_to_21k.json'),
-            'val_to_21k':     os.path.join(_dir, 'val_image_to_21k_key.json'),
+            'val_to_1k':      os.path.join(_dir, 'val_image_to_1k_label.json'),
             'gpt':            os.path.join(_dir, _GPT_JSON_FILENAME),
             'clean_names':    os.path.join(_dir, clean_names_json_filename),
         }
@@ -137,18 +137,31 @@ class ClassDictionary:
         data = self._load_json('1k_to_21k', int_keys=True)
         return data.get(key) if data else None
 
-    def val_image_to_21k_key(self, key):
+    def val_image_to_1k_label(self, key):
         """
-        Maps a validation image ID to its corresponding ImageNet-21k string key.
+        Maps a validation image filename to its ImageNet-1k integer label.
 
         Args:
-            key (str): The validation split image ID.
+            key (str): The validation split image filename (e.g. "ILSVRC2012_val_00015416.JPEG").
 
         Returns:
-            str | None: The ImageNet-21k class key if the image ID exists, None otherwise.
+            int | None: The ImageNet-1k integer label if the filename exists, None otherwise.
         """
-        data = self._load_json('val_to_21k')
+        data = self._load_json('val_to_1k')
         return data.get(key) if data else None
+
+    def val_image_to_21k_key(self, key):
+        """
+        Maps a validation image filename to its ImageNet-21k string key.
+
+        Args:
+            key (str): The validation split image filename (e.g. "ILSVRC2012_val_00015416.JPEG").
+
+        Returns:
+            str | None: The ImageNet-21k class key if the filename exists, None otherwise.
+        """
+        label_1k = self.val_image_to_1k_label(key)
+        return self.imagenet1k_to_21k(label_1k) if label_1k is not None else None
 
     @staticmethod
     def create_label_to_name_dict(class_names):

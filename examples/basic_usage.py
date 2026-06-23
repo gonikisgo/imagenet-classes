@@ -32,9 +32,10 @@ def main():
     print(f"   imagenet1k_to_21k(0)              → {ic.imagenet1k_to_21k(0)}")
     print(f"   imagenet21k_to_1k('n01440764')    → {ic.imagenet21k_to_1k('n01440764')}")
 
-    print("\n4. Validation image → 21k key:")
-    print(f"   val_image_to_21k_key('ILSVRC2012_val_00015416.JPEG') → "
-          f"{ic.val_image_to_21k_key('ILSVRC2012_val_00015416.JPEG')}")
+    print("\n4. Validation image → 1k label / 21k key:")
+    img = 'ILSVRC2012_val_00015416.JPEG'
+    print(f"   val_image_to_1k_label('{img}')  → {ic.val_image_to_1k_label(img)}")
+    print(f"   val_image_to_21k_key('{img}') → {ic.val_image_to_21k_key(img)}")
 
     # --- ClassDictionary static utilities ---
     print("\n5. Label ↔ name dict utilities:")

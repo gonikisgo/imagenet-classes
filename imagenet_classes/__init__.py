@@ -6,7 +6,7 @@ A Python package for managing and retrieving ImageNet-1k mappings among integer 
 
 from .class_loader import ClassDictionary
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 __author__ = "Illia Volkov, Nikita Kisel"
 __email__ = "kiselnik@fel.cvut.cz"
 
@@ -19,6 +19,7 @@ __all__ = [
     "get_gpt_class_guidelines",
     "imagenet21k_to_1k",
     "imagenet1k_to_21k",
+    "val_image_to_1k_label",
     "val_image_to_21k_key",
 ]
 
@@ -51,6 +52,10 @@ def imagenet21k_to_1k(key: str):
 
 def imagenet1k_to_21k(key: int):
     return _default.imagenet1k_to_21k(key)
+
+
+def val_image_to_1k_label(key: str):
+    return _default.val_image_to_1k_label(key)
 
 
 def val_image_to_21k_key(key: str):

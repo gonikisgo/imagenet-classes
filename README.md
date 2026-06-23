@@ -87,12 +87,13 @@ ic.imagenet1k_to_21k(0)              # → 'n01440764'
 ic.imagenet21k_to_1k('n01440764')    # → 0
 ```
 
-### Validation image → ImageNet-21k key
+### Validation image → ImageNet-1k label / ImageNet-21k key
 
-Maps a validation split image filename to its ImageNet-21k class index.
+Maps a validation split image filename to its ImageNet-1k integer label or ImageNet-21k string key.
 
 ```python
-ic.val_image_to_21k_key('ILSVRC2012_val_00015416.JPEG')   # → 13
+ic.val_image_to_1k_label('ILSVRC2012_val_00015416.JPEG')   # → 13
+ic.val_image_to_21k_key('ILSVRC2012_val_00015416.JPEG')    # → 'n01534433'
 ```
 
 ## Using `ClassDictionary` directly
